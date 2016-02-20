@@ -3,15 +3,15 @@ public class Solution {
         Map<String, Integer> map = new HashMap<>();
         List<List<String>> res = new ArrayList<>();
         int cnt = 0;
-        for (String s : strs) {
+        for(String s : strs) {
             String hc = hashcode(s);
-            if (!map.containsKey(hc)) {
+            if(!map.containsKey(hc)) {
                 map.put(hc, cnt++);
                 res.add(new ArrayList<>());
             }
             res.get(map.get(hc)).add(s);
         }
-        for (List<String> list : res) {
+        for(List<String> list : res) {
             Collections.sort(list);
         }
         return res;

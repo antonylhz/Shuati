@@ -2,14 +2,12 @@ class TrieNode {
     char val;
     boolean end;
     HashMap<Character, TrieNode> children;
-
     // Initialize your data structure here.
     public TrieNode() {
         this.val = ' ';
         this.end = false;
         this.children = new HashMap<Character, TrieNode>();
     }
-
     public TrieNode(char val) {
         this.val = val;
         this.end = false;
@@ -29,8 +27,8 @@ public class WordDictionary {
     public void addWord(String word) {
         char[] chars = word.toCharArray();
         TrieNode cur = root;
-        for (char c : chars) {
-            if (!cur.children.containsKey(c)) {
+        for(char c : chars) {
+            if(!cur.children.containsKey(c)) {
                 TrieNode newnode = new TrieNode(c);
                 cur.children.put(c, newnode);
             }
@@ -45,14 +43,14 @@ public class WordDictionary {
         char[] chars = word.toCharArray();
         List<TrieNode> candidates = new ArrayList<TrieNode>();
         candidates.add(root);
-        int i = 0;
-        while (i < word.length() && !candidates.isEmpty()) {
+        int i=0;
+        while(i<word.length()&&!candidates.isEmpty()) {
             List<TrieNode> new_candidates = new ArrayList<TrieNode>();
-            for (TrieNode cur : candidates) {
-                if (chars[i] == '.') {
+            for(TrieNode cur : candidates) {
+                if(chars[i]=='.') {
                     new_candidates.addAll(cur.children.values());
                 } else {
-                    if (cur.children.containsKey(chars[i])) {
+                    if(cur.children.containsKey(chars[i])) {
                         new_candidates.add(cur.children.get(chars[i]));
                     }
                 }
@@ -60,9 +58,9 @@ public class WordDictionary {
             candidates = new_candidates;
             i++;
         }
-        if (candidates.isEmpty()) return false;
-        for (TrieNode candidate : candidates) {
-            if (candidate.end)
+        if(candidates.isEmpty()) return false;
+        for(TrieNode candidate : candidates) {
+            if(candidate.end)
                 return true;
         }
         return false;

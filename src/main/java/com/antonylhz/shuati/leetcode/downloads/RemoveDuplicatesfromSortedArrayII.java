@@ -1,19 +1,20 @@
 public class Solution {
     public int removeDuplicates(int[] A) {
-        if (A.length < 3) return A.length;
+        if(A.length<3) return A.length;
         int i = 0, j = 1; //i is the index of the tail of condensed array, and j is the index of the current observing element
         int count = 1;
-        while (j < A.length) {
-            if (A[j] == A[i]) {
-                if (count < 2) {
+        while(j<A.length) {
+            if(A[j]==A[i]) {
+                if(count<2) {
                     A[++i] = A[j++];
                     count++;
-                } else j++;
+                }
+                else j++;
             } else {
                 A[++i] = A[j++];
                 count = 1;
             }
         }
-        return i + 1;
+        return i+1;
     }
 }

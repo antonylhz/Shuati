@@ -5,15 +5,15 @@ public class NumArray {
     public NumArray(int[] nums) {
         arr = new int[nums.length];
         bit = new int[nums.length + 1];
-        for (int i = 0; i < nums.length; i++) {
+        for(int i=0; i<nums.length; i++) {
             update(i, nums[i]);
         }
     }
 
     void update(int i, int val) {
         val -= arr[i];
-        if (val != 0) {
-            for (int index = i + 1; index < bit.length; index += index & (-index)) {
+        if(val != 0) {
+            for(int index = i + 1; index < bit.length; index += index & (-index)) {
                 bit[index] += val;
             }
         }
@@ -22,15 +22,15 @@ public class NumArray {
 
     private int getSum(int i) {
         int sum = 0;
-        for (int index = i + 1; index > 0; index -= index & (-index)) {
+        for(int index = i + 1; index > 0; index -= index & (-index)) {
             sum += bit[index];
         }
         return sum;
     }
 
     public int sumRange(int i, int j) {
-        if (i == 0) return getSum(j);
-        return getSum(j) - getSum(i - 1);
+        if(i == 0) return getSum(j);
+        return getSum(j) - getSum(i-1);
     }
 }
 

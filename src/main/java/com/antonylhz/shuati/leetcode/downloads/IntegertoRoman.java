@@ -1,8 +1,8 @@
 public class Solution {
     public String intToRoman(int num) {
         StringBuilder result = new StringBuilder();
-        int last = num % 10;
-        switch (last) {
+        int last = num%10;
+        switch(last) {
             case 1:
                 result.insert(0, "I");
                 break;
@@ -32,9 +32,9 @@ public class Solution {
                 break;
         }
         num /= 10;
-        if (num == 0) return result.toString();
-        last = num % 10;
-        switch (last) {
+        if(num==0) return result.toString();
+        last = num%10;
+        switch(last) {
             case 1:
                 result.insert(0, "X");
                 break;
@@ -64,9 +64,9 @@ public class Solution {
                 break;
         }
         num /= 10;
-        if (num == 0) return result.toString();
-        last = num % 10;
-        switch (last) {
+        if(num==0) return result.toString();
+        last = num%10;
+        switch(last) {
             case 1:
                 result.insert(0, "C");
                 break;
@@ -96,8 +96,8 @@ public class Solution {
                 break;
         }
         num /= 10;
-        if (num == 0) return result.toString();
-        for (int i = 0; i < num; i++) result.insert(0, "M");
+        if(num==0) return result.toString();
+        for(int i=0; i<num; i++) result.insert(0, "M");
         return result.toString();
     }
 }

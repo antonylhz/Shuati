@@ -4,13 +4,13 @@ public class Solution {
         int[] arr = new int[n];
         arr[0] = 1;
         Set<Integer> set = new HashSet<Integer>(n);
-        for (int i = 1; i < n; i++) {
+        for(int i=1 ;i<n; i++) {
             int num2 = arr[idx2] * 2, num3 = arr[idx3] * 3, num5 = arr[idx5] * 5;
-            if (num2 <= num3 && num2 <= num5) {
+            if(num2<=num3&&num2<=num5) {
                 arr[i] = num2;
                 set.add(num2);
                 idx2++;
-            } else if (num3 <= num2 && num3 <= num5) {
+            } else if(num3<=num2&&num3<=num5) {
                 arr[i] = num3;
                 set.add(num3);
                 idx3++;
@@ -20,10 +20,10 @@ public class Solution {
                 idx5++;
             }
             //find next applicable idxes
-            while (set.contains(arr[idx2] * 2)) idx2++;
-            while (set.contains(arr[idx3] * 3)) idx3++;
-            while (set.contains(arr[idx5] * 5)) idx5++;
+            while(set.contains(arr[idx2]*2)) idx2++;
+            while(set.contains(arr[idx3]*3)) idx3++;
+            while(set.contains(arr[idx5]*5)) idx5++;
         }
-        return arr[n - 1];
+        return arr[n-1];
     }
 }

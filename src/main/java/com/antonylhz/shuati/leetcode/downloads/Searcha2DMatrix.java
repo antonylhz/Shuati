@@ -1,48 +1,48 @@
 public class Solution {
     public boolean searchMatrix(int[][] matrix, int target) {
-        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) return false;
+        if(matrix==null||matrix.length==0||matrix[0].length==0) return false;
         int height = matrix.length, width = matrix[0].length;
-        int rStart = 0, rEnd = height - 1, rTarget = 0;
-        while (rStart <= rEnd) {
-            if (matrix[rStart][0] == target || matrix[rStart][width - 1] == target || matrix[rEnd][0] == target || matrix[rEnd][width - 1] == target) {
+        int rStart = 0, rEnd = height-1, rTarget = 0;
+        while(rStart<=rEnd) {
+            if(matrix[rStart][0]==target||matrix[rStart][width-1]==target||matrix[rEnd][0]==target||matrix[rEnd][width-1]==target) {
                 return true;
-            } else if (target < matrix[rStart][0] || target > matrix[rEnd][width - 1]) {
+            } else if(target<matrix[rStart][0]||target>matrix[rEnd][width-1]) {
                 return false;
-            } else if (target > matrix[rStart][0] && target < matrix[rStart][width - 1]) {
+            } else if(target>matrix[rStart][0]&&target<matrix[rStart][width-1]) {
                 rTarget = rStart;
                 break;
-            } else if (target > matrix[rEnd][0] && target < matrix[rEnd][width - 1]) {
+            } else if(target>matrix[rEnd][0]&&target<matrix[rEnd][width-1]) {
                 rTarget = rEnd;
                 break;
             }
-            if (rEnd - rStart < 2) return false;
-            rTarget = (rStart + rEnd) / 2;
-            if (target == matrix[rTarget][0] || target == matrix[rTarget][width - 1]) {
+            if(rEnd-rStart<2) return false;
+            rTarget = (rStart+rEnd)/2;
+            if(target==matrix[rTarget][0]||target==matrix[rTarget][width-1]) {
                 return true;
-            } else if (target > matrix[rTarget][0] && target < matrix[rTarget][width - 1]) {
+            } else if(target>matrix[rTarget][0]&&target<matrix[rTarget][width-1]) {
                 break;
             } else {
-                if (target < matrix[rTarget][0]) {
+                if(target<matrix[rTarget][0]) {
                     rStart++;
-                    rEnd = rTarget - 1;
+                    rEnd = rTarget-1;
                 } else {
-                    rStart = rTarget + 1;
+                    rStart = rTarget+1;
                     rEnd--;
                 }
             }
         }
-        if (rStart > rEnd) return false;
-        int cStart = 0, cEnd = width - 1, cTarget;
-        while (cStart <= cEnd) {
-            if (target == matrix[rTarget][cStart] || target == matrix[rTarget][cEnd]) return true;
-            cTarget = (cStart + cEnd) / 2;
-            if (target == matrix[rTarget][cTarget]) return true;
-            else if (target < matrix[rTarget][cTarget]) {
+        if(rStart>rEnd) return false;
+        int cStart = 0, cEnd = width-1, cTarget;
+        while(cStart <= cEnd) {
+            if(target==matrix[rTarget][cStart]||target==matrix[rTarget][cEnd]) return true;
+            cTarget = (cStart+cEnd)/2;
+            if(target==matrix[rTarget][cTarget]) return true;
+            else if(target<matrix[rTarget][cTarget]) {
                 cStart++;
-                cEnd = cTarget - 1;
+                cEnd = cTarget-1;
             } else {
                 cEnd--;
-                cStart = cTarget + 1;
+                cStart = cTarget+1;
             }
         }
         return false;

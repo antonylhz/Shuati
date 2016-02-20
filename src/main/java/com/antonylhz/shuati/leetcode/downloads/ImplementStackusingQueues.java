@@ -15,9 +15,9 @@ class MyStack {
 
     // Removes the element on top of the stack.
     public void pop() {
-        LinkedList<Integer> list_other = (list_cur == list1 ? list2 : list1);
+        LinkedList<Integer> list_other = (list_cur==list1?list2:list1);
         Integer element = list_cur.poll();
-        while (!list_cur.isEmpty()) {
+        while(!list_cur.isEmpty()) {
             list_other.add(element);
             element = list_cur.poll();
         }
@@ -26,9 +26,9 @@ class MyStack {
 
     // Get the top element.
     public int top() {
-        LinkedList<Integer> list_other = (list_cur == list1 ? list2 : list1);
+        LinkedList<Integer> list_other = (list_cur==list1?list2:list1);
         Integer element = 0;
-        while (!list_cur.isEmpty()) {
+        while(!list_cur.isEmpty()) {
             element = list_cur.poll();
             list_other.add(element);
         }

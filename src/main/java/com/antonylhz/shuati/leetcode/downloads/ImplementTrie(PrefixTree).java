@@ -2,14 +2,12 @@ class TrieNode {
     char val;
     boolean end;
     HashMap<Character, TrieNode> children;
-
     // Initialize your data structure here.
     public TrieNode() {
         this.val = ' ';
         this.end = false;
         this.children = new HashMap<Character, TrieNode>();
     }
-
     public TrieNode(char val) {
         this.val = val;
         this.end = false;
@@ -28,8 +26,8 @@ public class Trie {
     public void insert(String word) {
         char[] chars = word.toCharArray();
         TrieNode cur = root;
-        for (char c : chars) {
-            if (!cur.children.containsKey(c)) {
+        for(char c : chars) {
+            if(!cur.children.containsKey(c)) {
                 TrieNode newnode = new TrieNode(c);
                 cur.children.put(c, newnode);
             }
@@ -42,8 +40,8 @@ public class Trie {
     public boolean search(String word) {
         char[] chars = word.toCharArray();
         TrieNode cur = root;
-        for (char c : chars) {
-            if (!cur.children.containsKey(c))
+        for(char c : chars) {
+            if(!cur.children.containsKey(c))
                 return false;
             cur = cur.children.get(c);
         }
@@ -55,8 +53,8 @@ public class Trie {
     public boolean startsWith(String prefix) {
         char[] chars = prefix.toCharArray();
         TrieNode cur = root;
-        for (char c : chars) {
-            if (!cur.children.containsKey(c))
+        for(char c : chars) {
+            if(!cur.children.containsKey(c))
                 return false;
             cur = cur.children.get(c);
         }

@@ -1,11 +1,11 @@
 public class Solution {
     public boolean isPalindrome(String s) {
         s = s.toLowerCase();
-        int i = 0, j = s.length() - 1;
-        while (i < j) {
-            if (!isAlphanumeric(s.charAt(i))) i++;
-            else if (!isAlphanumeric(s.charAt(j))) j--;
-            else if (s.charAt(i) != s.charAt(j)) return false;
+        int i=0, j = s.length()-1;
+        while(i<j) {
+            if(!isAlphanumeric(s.charAt(i))) i++;
+            else if(!isAlphanumeric(s.charAt(j))) j--;
+            else if(s.charAt(i)!=s.charAt(j)) return false;
             else {
                 i++;
                 j--;
@@ -13,8 +13,7 @@ public class Solution {
         }
         return true;
     }
-
     private boolean isAlphanumeric(char c) {
-        return (c >= 'a' && c <= 'z') || (c >= '0' && c <= '9');
+        return (c>='a'&&c<='z') || (c>='0'&&c<='9');
     }
 }

@@ -5,9 +5,9 @@ public class Solution {
         int min = Integer.MAX_VALUE;
         int minIndex = -1;
 
-        for (int i = 0; i < gas.length; i++) {
+        for (int i=0; i<gas.length; i++){
             sum += (gas[i] - cost[i]);
-            if (sum < min) {
+            if (sum < min){
                 min = sum;
                 minIndex = i;
             }

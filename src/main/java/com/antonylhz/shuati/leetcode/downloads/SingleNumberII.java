@@ -10,6 +10,6 @@ public class Solution {
             x2 &= mask;
             x1 &= mask;
         }
-        return x1;
+         return x1;
     }
 }

@@ -1,5 +1,5 @@
 class MyQueue {
-    Stack<Integer> input = new Stack();
+Stack<Integer> input = new Stack();
     Stack<Integer> output = new Stack();
 
     public void push(int x) {

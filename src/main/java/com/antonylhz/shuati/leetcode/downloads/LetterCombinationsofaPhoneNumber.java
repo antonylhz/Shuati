@@ -4,25 +4,24 @@ public class Solution {
         char[] chars = digits.toCharArray();
         String temp;
         int size;
-        for (char c : chars) {
-            if (c > '9' || c < '2') return new ArrayList<String>();
+        for(char c : chars) {
+            if(c>'9'||c<'2') return new ArrayList<String>();
             char[] options = getOptions(c);
-            if (result.isEmpty()) {
-                for (char o : options) result.add("" + o);
+            if(result.isEmpty()) {
+                for(char o : options) result.add(""+o);
             } else {
                 size = result.size();
-                for (int i = 0; i < size; i++) {
+                for(int i=0; i<size; i++) {
                     temp = result.get(0);
                     result.remove(0);
-                    for (char o : options) result.add(temp + o);
+                    for(char o : options) result.add(temp+o);
                 }
             }
         }
         return result;
     }
-
     private char[] getOptions(char c) {
-        switch (c) {
+        switch(c) {
             case '2':
                 return new char[]{'a', 'b', 'c'};
             case '3':

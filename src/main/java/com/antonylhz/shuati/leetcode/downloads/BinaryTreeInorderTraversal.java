@@ -1,10 +1,10 @@
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
- * int val;
- * TreeNode left;
- * TreeNode right;
- * TreeNode(int x) { val = x; }
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
  * }
  */
 public class Solution {
@@ -12,13 +12,13 @@ public class Solution {
 
     public List<Integer> inorderTraversal(TreeNode root) {
         List<Integer> result = new ArrayList<Integer>();
-        if (root == null) return result;
+        if(root==null) return result;
         s.push(root);
         expand();
-        while (!s.isEmpty()) {
+        while(!s.isEmpty()) {
             TreeNode node = s.pop();
             result.add(node.val);
-            if (node.right != null) {
+            if(node.right!=null) {
                 s.push(node.right);
                 expand();
             }
@@ -27,9 +27,9 @@ public class Solution {
     }
 
     private void expand() {
-        if (!s.isEmpty()) {
+        if(!s.isEmpty()) {
             TreeNode node = s.peek();
-            while (node.left != null) {
+            while(node.left!=null) {
                 node = node.left;
                 s.push(node);
             }

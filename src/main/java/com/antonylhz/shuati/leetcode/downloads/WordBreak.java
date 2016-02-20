@@ -5,7 +5,7 @@ public class Solution {
         for (int i = 1; i <= s.length(); ++i) {
             for (int j = 0; j < i; ++j) {
                 d[i] |= d[j] && dict.contains(s.substring(j, i));
-                if (d[i]) break;
+                if(d[i]) break;
             }
         }
         return d[s.length()];

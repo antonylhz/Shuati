@@ -4,7 +4,7 @@ class MinStack {
 
     public void push(int x) {
         stack.push(x);
-        if (min.isEmpty()) min.push(x);
+        if(min.isEmpty()) min.push(x);
         else min.push(Math.min(min.peek(), x));
     }
 
