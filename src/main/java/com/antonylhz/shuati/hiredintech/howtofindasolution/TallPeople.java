@@ -76,6 +76,10 @@ public class TallPeople {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     private int tallestInRowShorts() {
         int res = MIN_HEIGHT - 1;
         for (int i = 0; i < height; i++) {
