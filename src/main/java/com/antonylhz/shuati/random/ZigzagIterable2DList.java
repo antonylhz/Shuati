@@ -2,7 +2,7 @@ package com.antonylhz.shuati.random;
 
 import java.util.*;
 
-import com.antonylhz.shuati.random.IterableList.LIterator;
+import com.antonylhz.shuati.random.IterableList.CachedListIterator;
 
 /**
  * Problem Description:
@@ -26,91 +26,132 @@ import com.antonylhz.shuati.random.IterableList.LIterator;
 
 class IterableList<T> implements Iterable<T>{
 	private List<T> data;
-	public IterableList(List<T> data) {
+    private CachedListIterator iterator = null;
+
+	IterableList(List<T> data) {
 		this.data = data;
 	}
-	public LIterator iterator() {
-		return new LIterator();
+
+	public CachedListIterator iterator() {
+        if (iterator == null) {
+            iterator = new CachedListIterator();
+        }
+        return iterator;
 	}
-	class LIterator implements Iterator<T> {
-		private int index;
-		public LIterator() {
-			index = 0;
+
+	class CachedListIterator implements Iterator<T> {
+		private int lastRet;
+
+		CachedListIterator() {
+            lastRet = -1;
 		}
+
 		@Override
 		public boolean hasNext() {
-			return index < data.size();
+			return lastRet + 1 < data.size();
 		}
 
 		@Override
 		public T next() {
-			return data.get(index++);
+			return data.get(++lastRet);
 		}
-		
-		public boolean hasPrevious() {
-			return index > 0;
+
+		boolean hasPrevious() {
+			return lastRet > 0;
 		}
-		
-		public T previous() {
-			return data.get(--index);
+
+		T previous() {
+			return data.get(--lastRet);
 		}
 	}
+
 }
 
 public class ZigzagIterable2DList<T> implements Iterable<T>{
 	
 	private List<IterableList<T>> data;
-	
-	public ZigzagIterable2DList(List<IterableList<T>> data) {
-		this.data = data;
-	}
+
+    public ZigzagIterable2DList() {
+        this.data = new ArrayList<>();
+    }
+
+	public ZigzagIterable2DList(List<List<T>> listOfLists) {
+        this();
+        if (listOfLists != null && listOfLists.size() > 0) {
+            for (int i = 0; i < listOfLists.size(); i++) {
+                data.add(new IterableList<T>(listOfLists.get(i)));
+            }
+        }
+    }
 
 	@Override
-	public LListIterator<T> iterator() {
-		// TODO Auto-generated method stub
-		return null;
+	public LListIterator iterator() {
+		return new LListIterator();
 	}
 	
-	private class LListIterator<T> implements Iterator<T> {
+    class LListIterator implements Iterator<T> {
 
-		private int[] idx, ts;
-		private int timer, tsize;
-		
-		public LListIterator() {
-			idx = new int[data.size()];
-			ts = new int[data.size()];
-			timer  = 0;
-		}
-		
-		private int curIndex() {
-			return 0;
-		}
+        private int index = -1;                         // Lastly returned list index; Initially at -1
+        private IterableList<T>.CachedListIterator prev = null, next = null;     // Cache found positions from hasXXX() methods
+        private boolean isNextPrepared = false;
+        private boolean isPrevPrepared = false;
+
+        LListIterator() {}
 		
 		@Override
 		public boolean hasNext() {
-			// TODO Auto-generated method stub
-			return false;
+            if (index >= 0) prev = data.get(index).iterator();
+            for (int i = 0; i < data.size() - 1; i++) {     // Consider at most these many rows
+                index = (index + 1) % data.size();
+                if (data.get(index).iterator().hasNext()) {
+                    next = data.get(index).iterator();
+                    isNextPrepared = true;
+                    return true;
+                }
+            }
+            return false;
 		}
 
 		@Override
 		public T next() {
-			// TODO Auto-generated method stub
-			return null;
+            if (!isNextPrepared || isPrevPrepared) {
+                throw new IllegalStateException();
+            } else {
+                isNextPrepared = false;
+            }
+            if (next == null) {  // This can happen either nothing next, or hasNext() is not called
+                return null;
+            } else {
+                return next.next();
+            }
 		}
+
+        public boolean hasPrevious() {
+            if (index >= 0) next = data.get(index).iterator();
+            for (int i = 0; i < data.size() - 1; i++) {  // Consider at most these many rows
+                index = (index - 1 + data.size()) % data.size();
+                if (data.get(index).iterator().hasPrevious()) {
+                    prev = data.get(index).iterator();
+                    isPrevPrepared = true;
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public T previous() {
+            if (isNextPrepared || !isPrevPrepared) {
+                throw new IllegalStateException();
+            } else {
+                isPrevPrepared = false;
+            }
+            if (prev == null) {
+                return null;
+            } else {
+                return prev.previous();
+            }
+        }
 		
-	}
-	
-	public static void main(String[] args) {
-		List<Integer> list = new ArrayList<>();
-		list.add(1);list.add(2);list.add(3);list.add(4);
-		IterableList<Integer> it = new IterableList<>(list);
-		LIterator itr = it.iterator();
-		while(itr.hasNext()) {
-			System.out.println(itr.next());
-		}
-		while(itr.hasPrevious()) {
-			System.out.println(itr.previous());
-		}
 	}
 
 }
