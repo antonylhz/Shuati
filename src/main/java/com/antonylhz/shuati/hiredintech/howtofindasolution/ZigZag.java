@@ -1,7 +1,5 @@
 package com.antonylhz.shuati.hiredintech.howtofindasolution;
 
-import com.sun.istack.internal.NotNull;
-
 /**
  * @author hongzhal
  */
@@ -13,7 +11,7 @@ public class ZigZag {
      * @param array of numbers
      * @return longest zigzag sub sequence
      */
-    public static int findLongest(@NotNull int[] array) {
+    public static int findLongest(int[] array) {
         if (array.length <= 2) {
             return array.length;
         }
